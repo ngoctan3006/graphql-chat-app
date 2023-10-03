@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 import * as graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.js';
+import { BadRequestException, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,6 +20,22 @@ async function bootstrap() {
   });
   app.use(cookieParser());
   app.use(graphqlUploadExpress({ maxFileSize: 10000000000, maxFiles: 1 }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      exceptionFactory: (error) => {
+        const formattedErrors = error.reduce((accumulator, error) => {
+          accumulator[error.property] = Object.values(error.constraints).join(
+            ', ',
+          );
+          return accumulator;
+        }, {});
+
+        throw new BadRequestException(formattedErrors);
+      },
+    }),
+  );
 
   await app.listen(3000);
 }
