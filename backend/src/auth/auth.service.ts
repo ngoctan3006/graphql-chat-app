@@ -9,7 +9,7 @@ import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import { PrismaService } from 'src/prisma.service';
-import { LoginDto } from './dto';
+import { LoginDto, RegisterDto } from './dto';
 
 @Injectable()
 export class AuthService {
@@ -85,5 +85,23 @@ export class AuthService {
       return user;
     }
     return null;
+  }
+
+  async register(registerDto: RegisterDto, response: Response) {
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email: registerDto.email },
+    });
+    if (existingUser) {
+      throw new BadRequestException({ email: 'Email already in use' });
+    }
+    const hashedPassword = await bcrypt.hash(registerDto.password, 10);
+    const user = await this.prisma.user.create({
+      data: {
+        fullname: registerDto.fullname,
+        password: hashedPassword,
+        email: registerDto.email,
+      },
+    });
+    return this.issueTokens(user, response);
   }
 }
