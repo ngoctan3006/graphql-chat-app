@@ -1,5 +1,5 @@
 import { BadRequestException } from '@nestjs/common';
-import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto';
@@ -43,5 +43,10 @@ export class AuthResolver {
     } catch (error) {
       throw new BadRequestException(error.message);
     }
+  }
+
+  @Query(() => String)
+  hello() {
+    return 'hello';
   }
 }
