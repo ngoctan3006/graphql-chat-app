@@ -1,11 +1,11 @@
-version: '3.1'
+version: "3.1"
 
 services:
   postgres:
     image: postgres:10
     container_name: graphql_chat_app_db
     ports:
-      - "5433:5433"
+      - 5440:5432
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
@@ -17,8 +17,7 @@ services:
     image: redis:latest
     container_name: graphql_chat_app_redis
     ports:
-      - "6378:6378"
-
+      - 6479:6379
 
 volumes:
   graphql_chat_app:
