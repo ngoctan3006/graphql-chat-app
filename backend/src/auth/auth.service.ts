@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '@prisma/client';
 import { Request, Response } from 'express';
 import { PrismaService } from 'src/prisma.service';
 
@@ -50,5 +51,27 @@ export class AuthService {
     res.cookie('access_token', accessToken, { httpOnly: true });
 
     return accessToken;
+  }
+
+  private async issueTokens(user: User, response: Response) {
+    const payload = { username: user.fullname, sub: user.id };
+
+    const accessToken = this.jwtService.sign(
+      { ...payload },
+      {
+        secret: this.configService.get<string>('ACCESS_TOKEN_SECRET'),
+        expiresIn: '150sec',
+      },
+    );
+    const refreshToken = this.jwtService.sign(payload, {
+      secret: this.configService.get<string>('REFRESH_TOKEN_SECRET'),
+      expiresIn: '7d',
+    });
+
+    response.cookie('access_token', accessToken, { httpOnly: true });
+    response.cookie('refresh_token', refreshToken, {
+      httpOnly: true,
+    });
+    return { user };
   }
 }
