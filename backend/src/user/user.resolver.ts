@@ -1,4 +1,5 @@
 import { UseGuards } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 import { Request } from 'express';
 import { createWriteStream } from 'fs';
@@ -11,7 +12,10 @@ import { User } from './user.type';
 
 @Resolver()
 export class UserResolver {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly configService: ConfigService,
+  ) {}
 
   @UseGuards(GraphqlAuthGuard)
   @Mutation(() => User)
@@ -30,7 +34,9 @@ export class UserResolver {
     const { createReadStream, filename } = await file;
     const uniqueFilename = `${uuidv4()}_${filename}`;
     const imagePath = join(process.cwd(), 'public', 'images', uniqueFilename);
-    const imageUrl = `${process.env.APP_URL}/images/${uniqueFilename}`;
+    const imageUrl = `${this.configService.get<string>(
+      'APP_URL',
+    )}/images/${uniqueFilename}`;
     const readStream = createReadStream();
     readStream.pipe(createWriteStream(imagePath));
     return imageUrl;
