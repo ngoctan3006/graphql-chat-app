@@ -11,6 +11,7 @@
     "codegen": "graphql-codegen --watch --verbose"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.4",
     "@emotion/react": "^11.11.1",
     "@mantine/core": "^7.1.2",
     "@mantine/dropzone": "^7.1.2",
