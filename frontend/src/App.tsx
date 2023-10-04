@@ -1,8 +1,12 @@
+import { Card, Text } from '@mantine/core';
 import React from 'react';
-import './App.css';
 
 const App: React.FC = () => {
-  return <h1>Hello</h1>;
+  return (
+    <Card>
+      <Text>Hallo</Text>
+    </Card>
+  );
 };
 
 export default App;
