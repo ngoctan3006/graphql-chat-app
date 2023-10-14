@@ -95,7 +95,7 @@ const link = split(
     return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
   },
   wsLink,
-  ApolloLink.from([errorLink, uploadLink])
+  ApolloLink.from([errorLink, uploadLink as any])
 );
 
 export const client = new ApolloClient({
