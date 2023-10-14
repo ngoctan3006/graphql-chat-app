@@ -40,7 +40,7 @@ let retryCount = 0;
 const maxRetry = 3;
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:3000/graphql`,
+  uri: import.meta.env.VITE_WS_URL,
   options: {
     reconnect: true,
     connectionParams: {
@@ -82,7 +82,7 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
 });
 
 const uploadLink = createUploadLink({
-  uri: 'http://localhost:3000/graphql',
+  uri: import.meta.env.VITE_GRAPHQL_URL,
   credentials: 'include',
   headers: {
     'apollo-require-preflight': 'true',
@@ -99,7 +99,7 @@ const link = split(
 );
 
 export const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  uri: import.meta.env.VITE_GRAPHQL_URL,
   cache: new InMemoryCache({}),
   credentials: 'include',
   headers: {
