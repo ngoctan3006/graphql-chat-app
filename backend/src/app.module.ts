@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
+import { TokenService } from './token/token.service';
 import { UserModule } from './user/user.module';
 
 const pubSub = new RedisPubSub({
@@ -41,6 +42,6 @@ const pubSub = new RedisPubSub({
     }),
   ],
   controllers: [],
-  providers: [],
+  providers: [TokenService],
 })
 export class AppModule {}
