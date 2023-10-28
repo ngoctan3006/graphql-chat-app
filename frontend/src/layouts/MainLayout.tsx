@@ -1,7 +1,16 @@
+import { Flex } from '@mantine/core';
 import React from 'react';
 
-const MainLayout: React.FC = () => {
-  return <div>MainLayout</div>;
+interface Props {
+  children: React.ReactElement;
+}
+
+const MainLayout: React.FC<Props> = ({ children }) => {
+  return (
+    <Flex>
+      <Flex>{children}</Flex>
+    </Flex>
+  );
 };
 
 export default MainLayout;
