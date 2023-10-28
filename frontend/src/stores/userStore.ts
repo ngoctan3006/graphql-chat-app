@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 import { User } from '../gql/graphql';
 
 interface UserState {
-  id: number | undefined;
+  id?: number;
   avatarUrl: string | null;
   fullname: string;
   email?: string;
