@@ -1,4 +1,4 @@
-import { createStyles, rem } from '@mantine/core';
+import { Tooltip, UnstyledButton, createStyles, rem } from '@mantine/core';
 import React from 'react';
 
 const useStyles = createStyles((theme) => {
@@ -27,6 +27,24 @@ const useStyles = createStyles((theme) => {
     },
   };
 });
+
+interface NavbarLinkProps {
+  icon: React.FC<any>;
+  label: string;
+  active?: boolean;
+  onClick?(): void;
+}
+
+const NavbarLink: React.FC<NavbarLinkProps> = ({ icon: Icon, label, active, onClick }) => {
+  const { classes, cx } = useStyles();
+  return (
+    <Tooltip label={label} position='top-start' offset={-30} transitionProps={{ duration: 0 }}>
+      <UnstyledButton onClick={onClick} className={cx(classes.link, { [classes.active]: active })}>
+        <Icon size='1.2rem' stroke={1.5} />
+      </UnstyledButton>
+    </Tooltip>
+  );
+};
 
 const Sidebar: React.FC = () => {
   return <div>Sidebar</div>;
