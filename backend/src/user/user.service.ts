@@ -43,4 +43,17 @@ export class UserService {
       data: { fullname },
     });
   }
+
+  async searchUsers(fullname: string, userId: number) {
+    return this.prisma.user.findMany({
+      where: {
+        fullname: {
+          contains: fullname,
+        },
+        id: {
+          not: userId,
+        },
+      },
+    });
+  }
 }
