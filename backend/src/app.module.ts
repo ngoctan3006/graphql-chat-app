@@ -6,6 +6,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
+import { ChatroomModule } from './chatroom/chatroom.module';
 import { TokenService } from './token/token.service';
 import { UserModule } from './user/user.module';
 
@@ -66,6 +67,7 @@ const pubSub = new RedisPubSub({
         },
       }),
     }),
+    ChatroomModule,
   ],
   controllers: [],
   providers: [TokenService],
