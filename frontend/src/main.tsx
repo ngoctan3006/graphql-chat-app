@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { client } from './apolloClient.ts';
 import './index.css';
-import Home from './pages/Home.tsx';
+import { Home } from './pages';
 
 const router = createBrowserRouter([
   {
