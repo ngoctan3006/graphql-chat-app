@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthOverlay, Sidebar } from '../components';
+import { AuthOverlay, ProfileSetting, Sidebar } from '../components';
 import { MainLayout } from '../layouts';
 
 const Home: React.FC = () => {
@@ -7,6 +7,7 @@ const Home: React.FC = () => {
     <MainLayout>
       <>
         <AuthOverlay />
+        <ProfileSetting />
         <Sidebar />
         HOME PAGE
       </>
