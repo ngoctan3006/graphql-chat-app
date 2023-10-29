@@ -12,7 +12,7 @@ import { onError } from '@apollo/client/link/error';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { createUploadLink } from 'apollo-upload-client';
-import { useUserStore } from './stores/userStore';
+import { useUserStore } from './stores';
 
 loadErrorMessages();
 loadDevMessages();

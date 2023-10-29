@@ -9,8 +9,7 @@ import {
 } from '@tabler/icons-react';
 import React, { useState } from 'react';
 import { LOGOUT_USER } from '../graphql/mutations/Logout';
-import { useGeneralStore } from '../stores/generalStore';
-import { useUserStore } from '../stores/userStore';
+import { useGeneralStore, useUserStore } from '../stores';
 import NavbarLink from './NavLink';
 
 const mockdata = [{ icon: IconBrandWechat, label: 'Chatrooms' }];

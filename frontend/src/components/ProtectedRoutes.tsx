@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { useGeneralStore } from '../stores/generalStore';
-import { useUserStore } from '../stores/userStore';
+import { useGeneralStore, useUserStore } from '../stores';
 
 interface Props {
   children: React.ReactNode;

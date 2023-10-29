@@ -1,6 +1,6 @@
-import React from 'react';
-import { useGeneralStore } from '../stores/generalStore';
 import { Modal } from '@mantine/core';
+import React from 'react';
+import { useGeneralStore } from '../stores';
 
 const AuthOverlay: React.FC = () => {
   const isLoginModalOpen = useGeneralStore((state) => state.isLoginModalOpen);
