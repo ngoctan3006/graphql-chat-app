@@ -1,8 +1,7 @@
 import React from 'react';
-import ProtectedRoutes from '../components/ProtectedRoutes';
-import Sidebar from '../components/Sidebar';
-import MainLayout from '../layouts/MainLayout';
 import AuthOverlay from '../components/AuthOverlay';
+import Sidebar from '../components/Sidebar';
+import { MainLayout } from '../layouts';
 
 const Home: React.FC = () => {
   return (
