@@ -2,6 +2,7 @@ import { ApolloDriver } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
@@ -20,6 +21,10 @@ const pubSub = new RedisPubSub({
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+      serveRoot: '/',
+    }),
     AuthModule,
     UserModule,
     ConfigModule.forRoot({
