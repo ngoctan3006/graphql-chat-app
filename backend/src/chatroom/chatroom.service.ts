@@ -137,4 +137,24 @@ export class ChatroomService {
 
     return imagePath;
   }
+
+  async getMessagesForChatroom(chatroomId: number) {
+    return await this.prisma.message.findMany({
+      where: {
+        chatroomId: chatroomId,
+      },
+      include: {
+        chatroom: {
+          include: {
+            users: {
+              orderBy: {
+                createdAt: 'asc',
+              },
+            },
+          },
+        },
+        user: true,
+      },
+    });
+  }
 }
