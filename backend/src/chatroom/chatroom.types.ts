@@ -15,10 +15,10 @@ export class Chatroom {
   @Field({ nullable: true })
   updatedAt?: Date;
 
-  @Field(() => [User], { nullable: true }) // array of user IDs
+  @Field(() => [User], { nullable: true })
   users?: User[];
 
-  @Field(() => [Message], { nullable: true }) // array of message IDs
+  @Field(() => [Message], { nullable: true })
   messages?: Message[];
 }
 
@@ -39,10 +39,10 @@ export class Message {
   @Field({ nullable: true })
   updatedAt?: Date;
 
-  @Field(() => Chatroom, { nullable: true }) // array of user IDs
+  @Field(() => Chatroom, { nullable: true })
   chatroom?: Chatroom;
 
-  @Field(() => User, { nullable: true }) // array of user IDs
+  @Field(() => User, { nullable: true })
   user?: User;
 }
 
