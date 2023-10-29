@@ -85,7 +85,7 @@ const ProfileSetting: React.FC = () => {
           <FileInput
             ref={fileInputRef}
             style={{ display: 'none' }}
-            pos={'absolute'}
+            pos='absolute'
             accept='image/*'
             placeholder='Upload new image'
             onChange={(file) => setImageFile(file)}
