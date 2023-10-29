@@ -1,6 +1,5 @@
 import React from 'react';
-import AuthOverlay from '../components/AuthOverlay';
-import Sidebar from '../components/Sidebar';
+import { AuthOverlay, Sidebar } from '../components';
 import { MainLayout } from '../layouts';
 
 const Home: React.FC = () => {
