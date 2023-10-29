@@ -63,7 +63,7 @@ const Sidebar: React.FC = () => {
           {userId && (
             <NavbarLink
               icon={IconUser}
-              label={'Profile(' + user.fullname + ')'}
+              label={`Profile (${user.fullname})`}
               onClick={toggleProfileSettingsModal}
             />
           )}
