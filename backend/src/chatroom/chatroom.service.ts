@@ -37,4 +37,29 @@ export class ChatroomService {
       },
     });
   }
+
+  async addUsersToChatroom(chatroomId: number, userIds: number[]) {
+    const existingChatroom = await this.prisma.chatroom.findUnique({
+      where: {
+        id: chatroomId,
+      },
+    });
+    if (!existingChatroom) {
+      throw new BadRequestException({ chatroomId: 'Chatroom does not exist' });
+    }
+
+    return await this.prisma.chatroom.update({
+      where: {
+        id: chatroomId,
+      },
+      data: {
+        users: {
+          connect: userIds.map((id) => ({ id: id })),
+        },
+      },
+      include: {
+        users: true,
+      },
+    });
+  }
 }
