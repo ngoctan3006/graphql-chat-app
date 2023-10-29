@@ -1,5 +1,5 @@
 import { UseFilters, UseGuards } from '@nestjs/common';
-import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Request } from 'express';
 import { GraphqlAuthGuard } from 'src/auth/graphql-auth.guard';
 import { GraphQLErrorFilter } from 'src/filters/custom-exception.filter';
@@ -13,6 +13,11 @@ export class ChatroomResolver {
     private readonly chatroomService: ChatroomService,
     private readonly userService: UserService,
   ) {}
+
+  @Query(() => [Chatroom])
+  async getChatroomsForUser(@Args('userId') userId: number) {
+    return this.chatroomService.getChatroomsForUser(userId);
+  }
 
   @UseFilters(GraphQLErrorFilter)
   @UseGuards(GraphqlAuthGuard)
