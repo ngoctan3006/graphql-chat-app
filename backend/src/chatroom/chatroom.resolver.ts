@@ -5,7 +5,7 @@ import { GraphqlAuthGuard } from 'src/auth/graphql-auth.guard';
 import { GraphQLErrorFilter } from 'src/filters/custom-exception.filter';
 import { UserService } from 'src/user/user.service';
 import { ChatroomService } from './chatroom.service';
-import { Chatroom } from './chatroom.types';
+import { Chatroom, Message } from './chatroom.types';
 
 @Resolver()
 export class ChatroomResolver {
@@ -17,6 +17,11 @@ export class ChatroomResolver {
   @Query(() => [Chatroom])
   async getChatroomsForUser(@Args('userId') userId: number) {
     return this.chatroomService.getChatroomsForUser(userId);
+  }
+
+  @Query(() => [Message])
+  async getMessagesForChatroom(@Args('chatroomId') chatroomId: number) {
+    return this.chatroomService.getMessagesForChatroom(chatroomId);
   }
 
   @UseFilters(GraphQLErrorFilter)
