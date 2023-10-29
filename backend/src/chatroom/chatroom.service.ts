@@ -87,4 +87,28 @@ export class ChatroomService {
       },
     });
   }
+
+  async sendMessage(
+    chatroomId: number,
+    message: string,
+    userId: number,
+    imagePath: string,
+  ) {
+    return await this.prisma.message.create({
+      data: {
+        content: message,
+        imageUrl: imagePath,
+        chatroomId,
+        userId,
+      },
+      include: {
+        chatroom: {
+          include: {
+            users: true,
+          },
+        },
+        user: true,
+      },
+    });
+  }
 }
