@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { createWriteStream } from 'fs';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
@@ -110,5 +111,30 @@ export class ChatroomService {
         user: true,
       },
     });
+  }
+
+  async saveImage(image: {
+    createReadStream: () => any;
+    filename: string;
+    mimetype: string;
+  }) {
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!validImageTypes.includes(image.mimetype)) {
+      throw new BadRequestException({ image: 'Invalid image type' });
+    }
+
+    const imageName = `${Date.now()}-${image.filename}`;
+    const imagePath = `${this.configService.get('IMAGE_PATH')}/${imageName}`;
+    const stream = image.createReadStream();
+    const outputPath = `public${imagePath}`;
+    const writeStream = createWriteStream(outputPath);
+    stream.pipe(writeStream);
+
+    await new Promise((resolve, reject) => {
+      stream.on('end', resolve);
+      stream.on('error', reject);
+    });
+
+    return imagePath;
   }
 }
