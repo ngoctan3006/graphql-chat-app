@@ -62,4 +62,29 @@ export class ChatroomService {
       },
     });
   }
+
+  async getChatroomsForUser(userId: number) {
+    return this.prisma.chatroom.findMany({
+      where: {
+        users: {
+          some: {
+            id: userId,
+          },
+        },
+      },
+      include: {
+        users: {
+          orderBy: {
+            createdAt: 'desc',
+          },
+        },
+        messages: {
+          take: 1,
+          orderBy: {
+            createdAt: 'desc',
+          },
+        },
+      },
+    });
+  }
 }
