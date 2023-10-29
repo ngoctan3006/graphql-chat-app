@@ -1,5 +1,5 @@
 import { BadRequestException, UseFilters } from '@nestjs/common';
-import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 import { Request, Response } from 'express';
 import { GraphQLErrorFilter } from 'src/filters/custom-exception.filter';
 import { AuthService } from './auth.service';
@@ -45,10 +45,5 @@ export class AuthResolver {
     } catch (error) {
       throw new BadRequestException(error.message);
     }
-  }
-
-  @Query(() => String)
-  hello() {
-    return 'hello';
   }
 }
