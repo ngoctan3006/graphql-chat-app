@@ -157,4 +157,12 @@ export class ChatroomService {
       },
     });
   }
+
+  async deleteChatroom(chatroomId: number) {
+    return this.prisma.chatroom.delete({
+      where: {
+        id: chatroomId,
+      },
+    });
+  }
 }
