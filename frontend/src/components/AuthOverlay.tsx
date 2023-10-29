@@ -1,6 +1,6 @@
 import { Modal } from '@mantine/core';
 import React, { useState } from 'react';
-import { Register } from '.';
+import { Login, Register } from '.';
 import { useGeneralStore } from '../stores';
 
 const AuthOverlay: React.FC = () => {
@@ -14,7 +14,7 @@ const AuthOverlay: React.FC = () => {
 
   return (
     <Modal centered opened={isLoginModalOpen} onClose={toggleLoginModal}>
-      <Register toggleForm={toggleForm} />
+      {isRegister ? <Register toggleForm={toggleForm} /> : <Login toggleForm={toggleForm} />}
     </Modal>
   );
 };
