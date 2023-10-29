@@ -41,4 +41,10 @@ export class ChatroomResolver {
   ) {
     return this.chatroomService.addUsersToChatroom(chatroomId, userIds);
   }
+
+  @Mutation(() => String)
+  async deleteChatroom(@Args('chatroomId') chatroomId: number) {
+    await this.chatroomService.deleteChatroom(chatroomId);
+    return 'Chatroom deleted successfully';
+  }
 }
