@@ -45,3 +45,12 @@ export class Message {
   @Field(() => User, { nullable: true }) // array of user IDs
   user?: User;
 }
+
+@ObjectType()
+export class UserTyping {
+  @Field(() => User, { nullable: true })
+  user?: User;
+
+  @Field({ nullable: true })
+  chatroomId?: number;
+}
