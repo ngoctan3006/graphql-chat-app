@@ -1327,7 +1327,7 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.4.tgz#0b92dcc0cc1c81f6f306a381f28e31b1a56536e9"
   integrity sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==
 
-"@types/accepts@^1.3.5":
+"@types/accepts@*", "@types/accepts@^1.3.5":
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/@types/accepts/-/accepts-1.3.6.tgz#5e33830c8ed7b6025976738c88540df2e85b6d91"
   integrity sha512-6+qlUg57yfE9OO63wnsJXLeq9cG3gSHBBIxNMOjNrbDRlDnm/NaR7RctfYcVCPq+j7d+MwOxqVEludH5+FKrlg==
@@ -1397,10 +1397,25 @@
   dependencies:
     "@types/node" "*"
 
+"@types/content-disposition@*":
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/@types/content-disposition/-/content-disposition-0.5.7.tgz#3b98d4bf8c80640f93b042511acb5aad18139748"
+  integrity sha512-V9/5u21RHFR1zfdm3rQ6pJUKV+zSSVQt+yq16i1YhdivVzWgPEoKedc3GdT8aFjsqQbakdxuy3FnEdePUQOamQ==
+
 "@types/cookiejar@*":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@types/cookiejar/-/cookiejar-2.1.2.tgz#66ad9331f63fe8a3d3d9d8c6e3906dd10f6446e8"
   integrity sha512-t73xJJrvdTjXrn4jLS9VSGRbz0nUY3cl2DMGDU48lKl+HR9dbbjW2A9r3g40VA++mQpy6uuHg33gy7du2BKpog==
+
+"@types/cookies@*":
+  version "0.7.9"
+  resolved "https://registry.yarnpkg.com/@types/cookies/-/cookies-0.7.9.tgz#d03e9af454b8e23718c9bf0d522649a64d5e67cf"
+  integrity sha512-SrGYvhKohd/WSOII0WpflC73RgdJhQoqpwq9q+n/qugNGiDSGYXfHy3QvB4+X+J/gYe27j2fSRnK4B+1A3nvsw==
+  dependencies:
+    "@types/connect" "*"
+    "@types/express" "*"
+    "@types/keygrip" "*"
+    "@types/node" "*"
 
 "@types/cors@2.8.12":
   version "2.8.12"
@@ -1457,6 +1472,16 @@
     "@types/range-parser" "*"
     "@types/send" "*"
 
+"@types/express@*":
+  version "4.17.20"
+  resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.20.tgz#e7c9b40276d29e38a4e3564d7a3d65911e2aa433"
+  integrity sha512-rOaqlkgEvOW495xErXMsmyX3WKBInbhG5eqojXYi3cGUaLoRDlXa5d52fkfWZT963AZ3v2eZ4MbKE6WpDAGVsw==
+  dependencies:
+    "@types/body-parser" "*"
+    "@types/express-serve-static-core" "^4.17.33"
+    "@types/qs" "*"
+    "@types/serve-static" "*"
+
 "@types/express@4.17.14":
   version "4.17.14"
   resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.14.tgz#143ea0557249bc1b3b54f15db4c81c3d4eb3569c"
@@ -1483,6 +1508,22 @@
   integrity sha512-MhzcwU8aUygZroVwL2jeYk6JisJrPl/oov/gsgGCue9mkgl9wjGbzReYQClxiUgFDnib9FuHqTndccKeZKxTRw==
   dependencies:
     "@types/node" "*"
+
+"@types/graphql-upload@^16.0.4":
+  version "16.0.4"
+  resolved "https://registry.yarnpkg.com/@types/graphql-upload/-/graphql-upload-16.0.4.tgz#e5874a4a8740d34ae818e80f9ce233d0fb513f86"
+  integrity sha512-QnDR8RdD2LKWnYTEgersn9dx5dfUrzLMeunblEpDxL0agd0XOujZezsnlfhD60eZxa2oG51ntVl/Gpu7rhs9ow==
+  dependencies:
+    "@types/express" "*"
+    "@types/koa" "*"
+    "@types/node" "*"
+    fs-capacitor "^8.0.0"
+    graphql "0.13.1 - 16"
+
+"@types/http-assert@*":
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/@types/http-assert/-/http-assert-1.5.4.tgz#2ee41bf930d871a76cdbee5c385ccbb3604302e6"
+  integrity sha512-/6M9aaVk+avzCsrv1lt39AlFw4faCNI6aGll91Rxj38ZE5JI8AxApyQIRy+i1McjiJiuQ0sfuoMLxqq374ZIbA==
 
 "@types/http-errors@*":
   version "2.0.2"
@@ -1526,6 +1567,32 @@
   resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-9.0.2.tgz#9eeb56c76dd555039be2a3972218de5bd3b8d83e"
   integrity sha512-drE6uz7QBKq1fYqqoFKTDRdFCPHd5TCub75BM+D+cMx7NU9hUz7SESLfC2fSCXVFMO5Yj8sOWHuGqPgjc+fz0Q==
   dependencies:
+    "@types/node" "*"
+
+"@types/keygrip@*":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@types/keygrip/-/keygrip-1.0.4.tgz#c4015f09e66633bdea5d26916810001272b1ac6a"
+  integrity sha512-/tjWYD8StMrINelsrHNmpXceo9s3/Y22AzePH1qCvXIgmz/aQp2YFFr6HqhNQVIOdcvaVyp5GS+yjHGuF7Rwsg==
+
+"@types/koa-compose@*":
+  version "3.2.7"
+  resolved "https://registry.yarnpkg.com/@types/koa-compose/-/koa-compose-3.2.7.tgz#7bbb084acc58836590eb11d3c2600c0ff695d3dc"
+  integrity sha512-smtvSL/oLICPuenxy73OmxKGh42VVfn2o2eutReH1yjij0LmxADBpGcAJbp4N+yJjPapPN7jAX9p7Ue0JMQ/Ag==
+  dependencies:
+    "@types/koa" "*"
+
+"@types/koa@*":
+  version "2.13.10"
+  resolved "https://registry.yarnpkg.com/@types/koa/-/koa-2.13.10.tgz#2c2a1cdf1252d654b05f444194328a3d23a880c4"
+  integrity sha512-weKc5IBeORLDGwD1FMgPjaZIg0/mtP7KxXAXEzPRCN78k274D9U2acmccDNPL1MwyV40Jj+hQQ5N2eaV6O0z8g==
+  dependencies:
+    "@types/accepts" "*"
+    "@types/content-disposition" "*"
+    "@types/cookies" "*"
+    "@types/http-assert" "*"
+    "@types/http-errors" "*"
+    "@types/keygrip" "*"
+    "@types/koa-compose" "*"
     "@types/node" "*"
 
 "@types/long@^4.0.0":
@@ -1622,6 +1689,11 @@
   integrity sha512-Vc/5/pRwSC055fU7Wu8erTj4gLpID9SdG2zRMuqaHLni3GTsrJ8gyB6MbFZZGLW6vQaGPhiUWRB6uWglv87MEg==
   dependencies:
     "@types/superagent" "*"
+
+"@types/uuid@^9.0.6":
+  version "9.0.6"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-9.0.6.tgz#c91ae743d8344a54b2b0c691195f5ff5265f6dfb"
+  integrity sha512-BT2Krtx4xaO6iwzwMFUYvWBWkV2pr37zD68Vmp1CDV196MzczBRxuEpD6Pr395HAgebC/co7hOphs53r8V7jew==
 
 "@types/validator@^13.7.10":
   version "13.11.2"
@@ -3356,6 +3428,11 @@ fs-capacitor@^6.2.0:
   resolved "https://registry.yarnpkg.com/fs-capacitor/-/fs-capacitor-6.2.0.tgz#fa79ac6576629163cb84561995602d8999afb7f5"
   integrity sha512-nKcE1UduoSKX27NSZlg879LdQc94OtbOsEmKMN2MBNudXREvijRKx2GEBsTMTfws+BrbkJoEuynbGSVRSpauvw==
 
+fs-capacitor@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/fs-capacitor/-/fs-capacitor-8.0.0.tgz#a95cbcf58dd50750fe718a03ec051961ef4e61f4"
+  integrity sha512-+Lk6iSKajdGw+7XYxUkwIzreJ2G1JFlYOdnKJv5PzwFLVsoJYBpCuS7WPIUSNT1IbQaEWT1nhYU63Ud03DyzLA==
+
 fs-extra@^10.0.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
@@ -3556,7 +3633,7 @@ graphql-ws@5.14.0:
   resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-5.14.0.tgz#766f249f3974fc2c48fae0d1fb20c2c4c79cd591"
   integrity sha512-itrUTQZP/TgswR4GSSYuwWUzrE/w5GhbwM2GX3ic2U7aw33jgEsayfIlvaj7/GcIvZgNMzsPTrE5hqPuFUiE5g==
 
-graphql@^16.8.1:
+"graphql@0.13.1 - 16", graphql@^16.8.1:
   version "16.8.1"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.8.1.tgz#1930a965bef1170603702acdb68aedd3f3cf6f07"
   integrity sha512-59LZHPdGZVh695Ud9lRzPBVTtlX9ZCV150Er2W43ro37wVof0ctenSaskPPjN7lVTIN8mSZt8PHUNKZuNQUuxw==
