@@ -23,4 +23,12 @@ export class ChatroomResolver {
   ) {
     return this.chatroomService.createChatroom(name, context.req.user.sub);
   }
+
+  @Mutation(() => Chatroom)
+  async addUsersToChatroom(
+    @Args('chatroomId') chatroomId: number,
+    @Args('userIds', { type: () => [Number] }) userIds: number[],
+  ) {
+    return this.chatroomService.addUsersToChatroom(chatroomId, userIds);
+  }
 }
