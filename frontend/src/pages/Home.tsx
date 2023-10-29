@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthOverlay, ProfileSetting, Sidebar } from '../components';
+import { AuthOverlay, ProfileSetting, ProtectedRoutes, RoomList, Sidebar } from '../components';
 import { MainLayout } from '../layouts';
 
 const Home: React.FC = () => {
@@ -9,7 +9,9 @@ const Home: React.FC = () => {
         <AuthOverlay />
         <ProfileSetting />
         <Sidebar />
-        HOME PAGE
+        <ProtectedRoutes>
+          <RoomList />
+        </ProtectedRoutes>
       </>
     </MainLayout>
   );
