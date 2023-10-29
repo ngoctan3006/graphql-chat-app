@@ -54,7 +54,7 @@ export class ChatroomService {
       },
       data: {
         users: {
-          connect: userIds.map((id) => ({ id: id })),
+          connect: userIds.map((id) => ({ id })),
         },
       },
       include: {
