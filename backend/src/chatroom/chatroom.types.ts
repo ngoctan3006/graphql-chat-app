@@ -54,3 +54,6 @@ export class UserTyping {
   @Field({ nullable: true })
   chatroomId?: number;
 }
+
+@ObjectType()
+export class UserStoppedTyping extends UserTyping {}
