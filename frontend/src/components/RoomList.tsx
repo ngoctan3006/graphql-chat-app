@@ -15,11 +15,6 @@ const RoomList: React.FC = () => {
   const userId = useUserStore((state) => state.id);
   const isSmallDevice = useMediaQuery('(max-width: 768px)');
   const isMediumDevice = useMediaQuery('(max-width: 992px)');
-  const { data, loading } = useQuery<GetChatroomsForUserQuery>(GET_CHATROOMS_FOR_USER, {
-    variables: {
-      userId: userId,
-    },
-  });
   const [activeRoomId, setActiveRoomId] = useState<number | null>(
     parseInt(useParams<{ id: string }>().id || '0')
   );
@@ -34,6 +29,12 @@ const RoomList: React.FC = () => {
   const defaultFlexStyles: CSSProperties = {
     maxWidth: isSmallDevice ? 'unset' : '200px',
   };
+
+  const { data, loading } = useQuery<GetChatroomsForUserQuery>(GET_CHATROOMS_FOR_USER, {
+    variables: {
+      userId: userId,
+    },
+  });
 
   const [deleteChatroom] = useMutation(DELETE_CHATROOM, {
     variables: {
