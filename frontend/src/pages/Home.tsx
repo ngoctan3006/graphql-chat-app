@@ -1,3 +1,4 @@
+import { Flex } from '@mantine/core';
 import React from 'react';
 import { AuthOverlay, ProfileSetting, ProtectedRoutes, RoomList, Sidebar } from '../components';
 import { MainLayout } from '../layouts';
@@ -10,7 +11,9 @@ const Home: React.FC = () => {
         <ProfileSetting />
         <Sidebar />
         <ProtectedRoutes>
-          <RoomList />
+          <Flex direction={{ base: 'column', md: 'row' }}>
+            <RoomList />
+          </Flex>
         </ProtectedRoutes>
       </>
     </MainLayout>
