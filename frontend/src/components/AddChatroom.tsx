@@ -1,5 +1,12 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { Button, Group, Modal, MultiSelect, Stepper, TextInput } from '@mantine/core';
+import {
+  Button,
+  Group,
+  Modal,
+  MultiSelect,
+  Stepper,
+  TextInput,
+} from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconPlus } from '@tabler/icons-react';
 import React, { useState } from 'react';
@@ -17,20 +24,29 @@ import { useGeneralStore } from '../stores';
 const AddChatroom: React.FC = () => {
   const [active, setActive] = useState(1);
   const [highestStepVisited, setHighestStepVisited] = useState(active);
-  const [newlyCreatedChatroom, setNewlyCreatedChatroom] = useState<Chatroom | null>(null);
+  const [newlyCreatedChatroom, setNewlyCreatedChatroom] =
+    useState<Chatroom | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
 
-  const isCreateRoomModalOpen = useGeneralStore((state) => state.isCreateRoomModalOpen);
-  const toggleCreateRoomModal = useGeneralStore((state) => state.toggleCreateRoomModal);
+  const isCreateRoomModalOpen = useGeneralStore(
+    (state) => state.isCreateRoomModalOpen
+  );
+  const toggleCreateRoomModal = useGeneralStore(
+    (state) => state.toggleCreateRoomModal
+  );
 
   const { data, refetch } = useQuery<SearchUsersQuery>(SEARCH_USERS, {
     variables: { fullname: searchTerm },
   });
-  const [addUsersToChatroom] = useMutation<AddUsersToChatroomMutation>(ADD_USERS_TO_CHATROOM, {
-    refetchQueries: ['GetChatroomsForUser'],
-  });
-  const [createChatroom, { loading }] = useMutation<CreateChatroomMutation>(CREATE_CHATROOM);
+  const [addUsersToChatroom] = useMutation<AddUsersToChatroomMutation>(
+    ADD_USERS_TO_CHATROOM,
+    {
+      refetchQueries: ['GetChatroomsForUser'],
+    }
+  );
+  const [createChatroom, { loading }] =
+    useMutation<CreateChatroomMutation>(CREATE_CHATROOM);
 
   const handleStepChange = (nextStep: number) => {
     const isOutOfBounds = nextStep > 2 || nextStep < 0;
@@ -75,7 +91,8 @@ const AddChatroom: React.FC = () => {
   const handleAddUsersToChatroom = async () => {
     await addUsersToChatroom({
       variables: {
-        chatroomId: newlyCreatedChatroom?.id && parseInt(newlyCreatedChatroom?.id),
+        chatroomId:
+          newlyCreatedChatroom?.id && parseInt(newlyCreatedChatroom?.id),
         userIds: selectedUsers.map((userId) => parseInt(userId)),
       },
       onCompleted: () => {
@@ -115,20 +132,20 @@ const AddChatroom: React.FC = () => {
 
   return (
     <Modal opened={isCreateRoomModalOpen} onClose={toggleCreateRoomModal}>
-      <Stepper active={active} onStepClick={setActive} breakpoint='sm'>
-        <Stepper.Step label='First step' description='Create Chatroom'>
+      <Stepper active={active} onStepClick={setActive} breakpoint="sm">
+        <Stepper.Step label="First step" description="Create Chatroom">
           <div>Create a Chatroom</div>
         </Stepper.Step>
-        <Stepper.Step label='Second step' description='Add members'>
+        <Stepper.Step label="Second step" description="Add members">
           <form onSubmit={form.onSubmit(() => handleCreateChatroom())}>
             <TextInput
-              placeholder='Chatroom Name'
-              label='Chatroom Name'
+              placeholder="Chatroom Name"
+              label="Chatroom Name"
               error={form.errors.name}
               {...form.getInputProps('name')}
             />
             {form.values.name && (
-              <Button mt={'md'} type='submit'>
+              <Button mt={'md'} type="submit">
                 Create Room
               </Button>
             )}
@@ -137,26 +154,26 @@ const AddChatroom: React.FC = () => {
         <Stepper.Completed>
           <MultiSelect
             onSearchChange={handleSearchChange}
-            nothingFound='No users found'
+            nothingFound="No users found"
             searchable
             pb={'xl'}
             data={selectItems}
-            label='Choose the members you want to add'
-            placeholder='Pick all the users you want to add to this chatroom'
+            label="Choose the members you want to add"
+            placeholder="Pick all the users you want to add to this chatroom"
             onChange={(values) => setSelectedUsers(values)}
           />
         </Stepper.Completed>
       </Stepper>
 
-      <Group mt='xl'>
-        <Button variant='default' onClick={() => handleStepChange(active - 1)}>
+      <Group mt="xl">
+        <Button variant="default" onClick={() => handleStepChange(active - 1)}>
           Back
         </Button>
 
         {selectedUsers.length > 0 && (
           <Button
             onClick={() => handleAddUsersToChatroom()}
-            color='blue'
+            color="blue"
             leftIcon={<IconPlus />}
             loading={loading}
           >

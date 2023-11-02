@@ -14,7 +14,11 @@ const AuthOverlay: React.FC = () => {
 
   return (
     <Modal centered opened={isLoginModalOpen} onClose={toggleLoginModal}>
-      {isRegister ? <Register toggleForm={toggleForm} /> : <Login toggleForm={toggleForm} />}
+      {isRegister ? (
+        <Register toggleForm={toggleForm} />
+      ) : (
+        <Login toggleForm={toggleForm} />
+      )}
     </Modal>
   );
 };

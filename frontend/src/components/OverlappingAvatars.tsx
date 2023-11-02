@@ -12,17 +12,22 @@ const OverlappingAvatars: React.FC<Props> = ({ users }) => {
 
   return (
     <Tooltip.Group openDelay={300} closeDelay={100}>
-      <Avatar.Group spacing='sm'>
+      <Avatar.Group spacing="sm">
         <>
           {users.slice(0, 3).map((user) => (
             <Tooltip key={user.id} label={user.fullname}>
-              <Avatar src={user.avatarUrl || null} radius='xl' alt={user.fullname} size='lg' />
+              <Avatar
+                src={user.avatarUrl || null}
+                radius="xl"
+                alt={user.fullname}
+                size="lg"
+              />
             </Tooltip>
           ))}
 
           {users.length > 3 && (
             <Tooltip label={remainingNames}>
-              <Avatar size='lg' radius='xl' children={`+${users.length - 3}`} />
+              <Avatar size="lg" radius="xl" children={`+${users.length - 3}`} />
             </Tooltip>
           )}
         </>

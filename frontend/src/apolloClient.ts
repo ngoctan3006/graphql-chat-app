@@ -92,7 +92,10 @@ const uploadLink = createUploadLink({
 const link = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
-    return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
   },
   wsLink,
   ApolloLink.from([errorLink, uploadLink as any])

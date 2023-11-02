@@ -1,5 +1,13 @@
 import { useMutation } from '@apollo/client';
-import { Avatar, Button, FileInput, Flex, Group, Modal, TextInput } from '@mantine/core';
+import {
+  Avatar,
+  Button,
+  FileInput,
+  Flex,
+  Group,
+  Modal,
+  TextInput,
+} from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconEditCircle } from '@tabler/icons-react';
 import React, { useRef, useState } from 'react';
@@ -7,8 +15,12 @@ import { UPDATE_PROFILE } from '../graphql/mutations/UpdateUserProfile';
 import { useGeneralStore, useUserStore } from '../stores';
 
 const ProfileSetting: React.FC = () => {
-  const isProfileSettingsModalOpen = useGeneralStore((state) => state.isProfileSettingsModalOpen);
-  const toggleProfileSettingsModal = useGeneralStore((state) => state.toggleProfileSettingsModal);
+  const isProfileSettingsModalOpen = useGeneralStore(
+    (state) => state.isProfileSettingsModalOpen
+  );
+  const toggleProfileSettingsModal = useGeneralStore(
+    (state) => state.toggleProfileSettingsModal
+  );
   const profileImage = useUserStore((state) => state.avatarUrl);
   const updateProfileImage = useUserStore((state) => state.updateProfileImage);
   const fullname = useUserStore((state) => state.fullname);
@@ -25,7 +37,9 @@ const ProfileSetting: React.FC = () => {
     },
     validate: {
       fullname: (value: string) =>
-        value.trim().length >= 3 ? null : 'Username must be at least 3 characters',
+        value.trim().length >= 3
+          ? null
+          : 'Username must be at least 3 characters',
     },
   });
 
@@ -52,11 +66,11 @@ const ProfileSetting: React.FC = () => {
     <Modal
       opened={isProfileSettingsModalOpen}
       onClose={toggleProfileSettingsModal}
-      title='Profile Settings'
+      title="Profile Settings"
     >
       <form onSubmit={form.onSubmit(() => handleSave())}>
         <Group
-          pos='relative'
+          pos="relative"
           w={100}
           h={100}
           style={{ cursor: 'pointer' }}
@@ -64,13 +78,13 @@ const ProfileSetting: React.FC = () => {
         >
           <Avatar
             src={imagePreview || profileImage || null}
-            alt='Profile'
+            alt="Profile"
             h={100}
             w={100}
             radius={100}
           />
           <IconEditCircle
-            color='black'
+            color="black"
             size={20}
             style={{
               position: 'absolute',
@@ -85,24 +99,24 @@ const ProfileSetting: React.FC = () => {
           <FileInput
             ref={fileInputRef}
             style={{ display: 'none' }}
-            pos='absolute'
-            accept='image/*'
-            placeholder='Upload new image'
+            pos="absolute"
+            accept="image/*"
+            placeholder="Upload new image"
             onChange={(file) => setImageFile(file)}
           />
         </Group>
         <TextInput
           style={{ marginTop: 20 }}
-          label='Username'
+          label="Username"
           {...form.getInputProps('fullname')}
           onChange={(event) => {
             form.setFieldValue('fullname', event.currentTarget.value);
           }}
           error={form.errors.fullname}
         />
-        <Flex gap='md' mt='sm'>
+        <Flex gap="md" mt="sm">
           <Button onClick={handleSave}>Save</Button>
-          <Button onClick={toggleProfileSettingsModal} variant='link'>
+          <Button onClick={toggleProfileSettingsModal} variant="link">
             Cancel
           </Button>
         </Flex>

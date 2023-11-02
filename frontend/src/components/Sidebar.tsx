@@ -15,7 +15,9 @@ import { useGeneralStore, useUserStore } from '../stores';
 const mockdata = [{ icon: IconBrandWechat, label: 'Chatrooms' }];
 
 const Sidebar: React.FC = () => {
-  const toggleProfileSettingsModal = useGeneralStore((state) => state.toggleProfileSettingsModal);
+  const toggleProfileSettingsModal = useGeneralStore(
+    (state) => state.toggleProfileSettingsModal
+  );
   const [active, setActive] = useState(0);
 
   const links = mockdata.map((link, index) => (
@@ -49,17 +51,17 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <Navbar fixed zIndex={100} w={rem(100)} p='md'>
+    <Navbar fixed zIndex={100} w={rem(100)} p="md">
       <Center>
-        <IconBrandMessenger type='mark' size={30} />
+        <IconBrandMessenger type="mark" size={30} />
       </Center>
       <Navbar.Section grow mt={50}>
-        <Stack justify='center' spacing={0}>
+        <Stack justify="center" spacing={0}>
           {userId && links}
         </Stack>
       </Navbar.Section>
       <Navbar.Section>
-        <Stack justify='center' spacing={0}>
+        <Stack justify="center" spacing={0}>
           {userId && (
             <NavbarLink
               icon={IconUser}
@@ -69,9 +71,17 @@ const Sidebar: React.FC = () => {
           )}
 
           {userId ? (
-            <NavbarLink icon={IconLogout} label='Logout' onClick={handleLogout} />
+            <NavbarLink
+              icon={IconLogout}
+              label="Logout"
+              onClick={handleLogout}
+            />
           ) : (
-            <NavbarLink icon={IconLogin} label='Login' onClick={toggleLoginModal} />
+            <NavbarLink
+              icon={IconLogin}
+              label="Login"
+              onClick={toggleLoginModal}
+            />
           )}
         </Stack>
       </Navbar.Section>

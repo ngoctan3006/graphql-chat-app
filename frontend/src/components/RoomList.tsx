@@ -1,5 +1,13 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { Button, Card, Flex, Group, Loader, ScrollArea, Text } from '@mantine/core';
+import {
+  Button,
+  Card,
+  Flex,
+  Group,
+  Loader,
+  ScrollArea,
+  Text,
+} from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconPlus, IconX } from '@tabler/icons-react';
 import React, { CSSProperties, useState } from 'react';
@@ -11,7 +19,9 @@ import { GET_CHATROOMS_FOR_USER } from '../graphql/queries/GetChatroomsForUser';
 import { useGeneralStore, useUserStore } from '../stores';
 
 const RoomList: React.FC = () => {
-  const toggleCreateRoomModal = useGeneralStore((state) => state.toggleCreateRoomModal);
+  const toggleCreateRoomModal = useGeneralStore(
+    (state) => state.toggleCreateRoomModal
+  );
   const userId = useUserStore((state) => state.id);
   const isSmallDevice = useMediaQuery('(max-width: 768px)');
   const isMediumDevice = useMediaQuery('(max-width: 992px)');
@@ -30,11 +40,14 @@ const RoomList: React.FC = () => {
     maxWidth: isSmallDevice ? 'unset' : '200px',
   };
 
-  const { data, loading } = useQuery<GetChatroomsForUserQuery>(GET_CHATROOMS_FOR_USER, {
-    variables: {
-      userId: userId,
-    },
-  });
+  const { data, loading } = useQuery<GetChatroomsForUserQuery>(
+    GET_CHATROOMS_FOR_USER,
+    {
+      variables: {
+        userId: userId,
+      },
+    }
+  );
 
   const [deleteChatroom] = useMutation(DELETE_CHATROOM, {
     variables: {
@@ -55,20 +68,27 @@ const RoomList: React.FC = () => {
 
   return (
     <Flex direction={'row'} h={'100vh'} ml={'100px'}>
-      <Card shadow='md' p={0}>
-        <Flex direction='column' align='start'>
-          <Group position='apart' w={'100%'} mb={'md'} mt={'md'}>
-            <Button onClick={toggleCreateRoomModal} variant='light' leftIcon={<IconPlus />}>
+      <Card shadow="md" p={0}>
+        <Flex direction="column" align="start">
+          <Group position="apart" w={'100%'} mb={'md'} mt={'md'}>
+            <Button
+              onClick={toggleCreateRoomModal}
+              variant="light"
+              leftIcon={<IconPlus />}
+            >
               Create a room
             </Button>
           </Group>
-          <ScrollArea h={'83vh'} w={isMediumDevice ? 'calc(100vw - 100px)' : '450px'}>
+          <ScrollArea
+            h={'83vh'}
+            w={isMediumDevice ? 'calc(100vw - 100px)' : '450px'}
+          >
             <Flex direction={'column'}>
-              <Flex justify='center' align='center' h='100%' mih={'75px'}>
+              <Flex justify="center" align="center" h="100%" mih={'75px'}>
                 {loading && (
-                  <Flex align='center'>
+                  <Flex align="center">
                     <Loader mr={'md'} />
-                    <Text c='dimmed' italic>
+                    <Text c="dimmed" italic>
                       Loading...
                     </Text>
                   </Flex>
@@ -93,7 +113,7 @@ const RoomList: React.FC = () => {
                     mih={120}
                     py={'md'}
                     withBorder
-                    shadow='md'
+                    shadow="md"
                   >
                     <Flex justify={'space-around'}>
                       {chatroom.users && (
@@ -107,31 +127,35 @@ const RoomList: React.FC = () => {
                           direction={'column'}
                           align={'start'}
                           w={'100%'}
-                          h='100%'
+                          h="100%"
                         >
                           <Flex direction={'column'}>
-                            <Text size='lg' style={defaultTextStyles}>
+                            <Text size="lg" style={defaultTextStyles}>
                               {chatroom.name}
                             </Text>
-                            <Text style={defaultTextStyles}>{chatroom.messages[0].content}</Text>
-                            <Text c='dimmed' style={defaultTextStyles}>
-                              {new Date(chatroom.messages[0].createdAt).toLocaleString()}
+                            <Text style={defaultTextStyles}>
+                              {chatroom.messages[0].content}
+                            </Text>
+                            <Text c="dimmed" style={defaultTextStyles}>
+                              {new Date(
+                                chatroom.messages[0].createdAt
+                              ).toLocaleString()}
                             </Text>
                           </Flex>
                         </Flex>
                       ) : (
-                        <Flex align='center' justify={'center'}>
-                          <Text italic c='dimmed'>
+                        <Flex align="center" justify={'center'}>
+                          <Text italic c="dimmed">
                             No Messages
                           </Text>
                         </Flex>
                       )}
                       {chatroom?.users && chatroom.users[0].id === userId && (
-                        <Flex h='100%' align='end' justify={'end'}>
+                        <Flex h="100%" align="end" justify={'end'}>
                           <Button
                             p={0}
-                            variant='light'
-                            color='red'
+                            variant="light"
+                            color="red"
                             onClick={(e) => {
                               e.preventDefault();
                               deleteChatroom();

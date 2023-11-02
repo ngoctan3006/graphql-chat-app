@@ -17,10 +17,16 @@ const useStyles = createStyles((theme) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
+      color:
+        theme.colorScheme === 'dark'
+          ? theme.colors.dark[0]
+          : theme.colors.gray[7],
 
       '&:hover': {
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
+        backgroundColor:
+          theme.colorScheme === 'dark'
+            ? theme.colors.dark[5]
+            : theme.colors.gray[0],
       },
     },
     active: {
@@ -29,18 +35,32 @@ const useStyles = createStyles((theme) => {
           variant: 'light',
           color: theme.primaryColor,
         }).background,
-        color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
+        color: theme.fn.variant({ variant: 'light', color: theme.primaryColor })
+          .color,
       },
     },
   };
 });
 
-const NavbarLink: React.FC<NavbarLinkProps> = ({ icon: Icon, label, active, onClick }) => {
+const NavbarLink: React.FC<NavbarLinkProps> = ({
+  icon: Icon,
+  label,
+  active,
+  onClick,
+}) => {
   const { classes, cx } = useStyles();
   return (
-    <Tooltip label={label} position='top-start' offset={-30} transitionProps={{ duration: 0 }}>
-      <UnstyledButton onClick={onClick} className={cx(classes.link, { [classes.active]: active })}>
-        <Icon size='1.2rem' stroke={1.5} />
+    <Tooltip
+      label={label}
+      position="top-start"
+      offset={-30}
+      transitionProps={{ duration: 0 }}
+    >
+      <UnstyledButton
+        onClick={onClick}
+        className={cx(classes.link, { [classes.active]: active })}
+      >
+        <Icon size="1.2rem" stroke={1.5} />
       </UnstyledButton>
     </Tooltip>
   );

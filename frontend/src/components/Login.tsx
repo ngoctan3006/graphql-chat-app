@@ -1,5 +1,13 @@
 import { useMutation } from '@apollo/client';
-import { Button, Col, Grid, Group, Paper, Text, TextInput } from '@mantine/core';
+import {
+  Button,
+  Col,
+  Grid,
+  Group,
+  Paper,
+  Text,
+  TextInput,
+} from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { GraphQLErrorExtensions } from 'graphql';
 import React, { useState } from 'react';
@@ -26,7 +34,9 @@ const Login: React.FC<LoginProps> = ({ toggleForm }) => {
     validate: {
       email: (value: string) => (value.includes('@') ? null : 'Invalid email'),
       password: (value: string) =>
-        value.trim().length >= 3 ? null : 'Password must be at least 3 characters',
+        value.trim().length >= 3
+          ? null
+          : 'Password must be at least 3 characters',
     },
   });
 
@@ -51,14 +61,16 @@ const Login: React.FC<LoginProps> = ({ toggleForm }) => {
     }).catch((err) => {
       setErrors(err.graphQLErrors[0].extensions);
       if (err.graphQLErrors[0].extensions?.invalidCredentials)
-        setInvalidCredentials(err.graphQLErrors[0].extensions.invalidCredentials);
+        setInvalidCredentials(
+          err.graphQLErrors[0].extensions.invalidCredentials
+        );
       useGeneralStore.setState({ isLoginModalOpen: true });
     });
   };
 
   return (
     <Paper>
-      <Text align='center' size='xl'>
+      <Text align="center" size="xl">
         Login
       </Text>
       <form
@@ -69,38 +81,43 @@ const Login: React.FC<LoginProps> = ({ toggleForm }) => {
         <Grid style={{ marginTop: 20 }}>
           <Col span={12} md={6}>
             <TextInput
-              autoComplete='off'
-              label='Email'
-              placeholder='Enter your email'
+              autoComplete="off"
+              label="Email"
+              placeholder="Enter your email"
               {...form.getInputProps('email')}
               error={form.errors.email || (errors?.email as string)}
             />
           </Col>
           <Col span={12} md={6}>
             <TextInput
-              autoComplete='off'
-              label='Password'
-              type='password'
-              placeholder='Enter your password'
+              autoComplete="off"
+              label="Password"
+              type="password"
+              placeholder="Enter your password"
               {...form.getInputProps('password')}
               error={form.errors.password || (errors?.password as string)}
             />
           </Col>
           {/* Not registered yet? then render register component. use something like a text, not a button */}
           <Col span={12} md={6}>
-            <Text color='red'>{invalidCredentials}</Text>
+            <Text color="red">{invalidCredentials}</Text>
           </Col>
           <Col span={12}>
-            <Button pl={0} variant='link' onClick={toggleForm}>
+            <Button pl={0} variant="link" onClick={toggleForm}>
               Not registered yet? Register here
             </Button>
           </Col>
         </Grid>
-        <Group position='left' style={{ marginTop: 20 }}>
-          <Button variant='outline' color='blue' type='submit' disabled={loading}>
+        <Group position="left" style={{ marginTop: 20 }}>
+          <Button
+            variant="outline"
+            color="blue"
+            type="submit"
+            disabled={loading}
+          >
             Login
           </Button>
-          <Button variant='outline' color='red' onClick={toggleLoginModal}>
+          <Button variant="outline" color="red" onClick={toggleLoginModal}>
             Cancel
           </Button>
         </Group>

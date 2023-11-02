@@ -1,5 +1,13 @@
 import { useMutation } from '@apollo/client';
-import { Button, Col, Grid, Group, Paper, Text, TextInput } from '@mantine/core';
+import {
+  Button,
+  Col,
+  Grid,
+  Group,
+  Paper,
+  Text,
+  TextInput,
+} from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { GraphQLErrorExtensions } from 'graphql';
 import React, { useState } from 'react';
@@ -21,18 +29,25 @@ const Register: React.FC<RegisterProps> = ({ toggleForm }) => {
     },
     validate: {
       fullname: (value: string) =>
-        value.trim().length >= 3 ? null : 'Username must be at least 3 characters',
+        value.trim().length >= 3
+          ? null
+          : 'Username must be at least 3 characters',
       email: (value: string) => (value.includes('@') ? null : 'Invalid email'),
       password: (value: string) =>
-        value.trim().length >= 3 ? null : 'Password must be at least 3 characters',
+        value.trim().length >= 3
+          ? null
+          : 'Password must be at least 3 characters',
       confirmPassword: (value: string, values) =>
-        value.trim().length >= 3 && value === values.password ? null : 'Passwords do not match',
+        value.trim().length >= 3 && value === values.password
+          ? null
+          : 'Passwords do not match',
     },
   });
   const setUser = useUserStore((state) => state.setUser);
   const setIsLoginOpen = useGeneralStore((state) => state.toggleLoginModal);
   const [errors, setErrors] = useState<GraphQLErrorExtensions>({});
-  const [registerUser, { loading }] = useMutation<RegisterUserMutation>(REGISTER_USER);
+  const [registerUser, { loading }] =
+    useMutation<RegisterUserMutation>(REGISTER_USER);
 
   const handleRegister = async () => {
     setErrors({});
@@ -63,7 +78,7 @@ const Register: React.FC<RegisterProps> = ({ toggleForm }) => {
 
   return (
     <Paper>
-      <Text align='center' size='xl'>
+      <Text align="center" size="xl">
         Register
       </Text>
 
@@ -75,8 +90,8 @@ const Register: React.FC<RegisterProps> = ({ toggleForm }) => {
         <Grid mt={20}>
           <Col span={12} md={6}>
             <TextInput
-              label='Fullname'
-              placeholder='Choose a full name'
+              label="Fullname"
+              placeholder="Choose a full name"
               {...form.getInputProps('fullname')}
               error={form.errors.username || (errors?.username as string)}
             />
@@ -84,19 +99,19 @@ const Register: React.FC<RegisterProps> = ({ toggleForm }) => {
 
           <Col span={12} md={6}>
             <TextInput
-              autoComplete='off'
-              label='Email'
-              placeholder='Enter your email'
+              autoComplete="off"
+              label="Email"
+              placeholder="Enter your email"
               {...form.getInputProps('email')}
               error={form.errors.email || (errors?.email as string)}
             />
           </Col>
           <Col span={12} md={6}>
             <TextInput
-              autoComplete='off'
-              label='Password'
-              type='password'
-              placeholder='Enter your password'
+              autoComplete="off"
+              label="Password"
+              type="password"
+              placeholder="Enter your password"
               {...form.getInputProps('password')}
               error={form.errors.password || (errors?.password as string)}
             />
@@ -104,26 +119,34 @@ const Register: React.FC<RegisterProps> = ({ toggleForm }) => {
           <Col span={12} md={6}>
             <TextInput
               {...form.getInputProps('confirmPassword')}
-              error={form.errors.confirmPassword || (errors?.confirmPassword as string)}
-              autoComplete='off'
-              label='Confirm Password'
-              type='password'
-              placeholder='Confirm your password'
+              error={
+                form.errors.confirmPassword ||
+                (errors?.confirmPassword as string)
+              }
+              autoComplete="off"
+              label="Confirm Password"
+              type="password"
+              placeholder="Confirm your password"
             />
           </Col>
 
           <Col span={12}>
-            <Button variant='link' onClick={toggleForm} pl={0}>
+            <Button variant="link" onClick={toggleForm} pl={0}>
               Already registered? Login here
             </Button>
           </Col>
         </Grid>
 
-        <Group position='left' mt={20}>
-          <Button variant='outline' color='blue' type='submit' disabled={loading}>
+        <Group position="left" mt={20}>
+          <Button
+            variant="outline"
+            color="blue"
+            type="submit"
+            disabled={loading}
+          >
             Register
           </Button>
-          <Button variant='outline' color='red'>
+          <Button variant="outline" color="red">
             Cancel
           </Button>
         </Group>
