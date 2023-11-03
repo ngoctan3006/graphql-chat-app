@@ -49,6 +49,20 @@ export class ChatroomResolver {
     return this.pubSub.asyncIterator(`userStartedTyping.${chatroomId}`);
   }
 
+  @Subscription(() => User, {
+    nullable: true,
+    resolve: (value) => value.user,
+    filter: (payload, variables) => {
+      return variables.userId !== payload.typingUserId;
+    },
+  })
+  userStoppedTyping(
+    @Args('chatroomId') chatroomId: number,
+    @Args('userId') userId: number,
+  ) {
+    return this.pubSub.asyncIterator(`userStoppedTyping.${chatroomId}`);
+  }
+
   @Query(() => [Chatroom])
   async getChatroomsForUser(@Args('userId') userId: number) {
     return this.chatroomService.getChatroomsForUser(userId);
