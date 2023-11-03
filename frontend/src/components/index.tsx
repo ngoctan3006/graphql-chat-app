@@ -1,5 +1,7 @@
 export { default as AddChatroom } from './AddChatroom';
 export { default as AuthOverlay } from './AuthOverlay';
+export { default as Chatwindow } from './Chatwindow';
+export { default as JoinRoomOrChatwindow } from './JoinRoomOrChatwindow';
 export { default as Login } from './Login';
 export { default as NavbarLink } from './NavLink';
 export { default as OverlappingAvatars } from './OverlappingAvatars';
