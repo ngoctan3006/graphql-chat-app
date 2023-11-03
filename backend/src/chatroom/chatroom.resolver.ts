@@ -12,6 +12,7 @@ import { PubSub } from 'graphql-subscriptions';
 import { GraphqlAuthGuard } from 'src/auth/graphql-auth.guard';
 import { GraphQLErrorFilter } from 'src/filters/custom-exception.filter';
 import { UserService } from 'src/user/user.service';
+import { User } from 'src/user/user.type';
 import { ChatroomService } from './chatroom.service';
 import { Chatroom, Message } from './chatroom.types';
 
@@ -31,6 +32,21 @@ export class ChatroomResolver {
   })
   newMessage(@Args('chatroomId') chatroomId: number) {
     return this.pubSub.asyncIterator(`newMessage.${chatroomId}`);
+  }
+
+  @Subscription(() => User, {
+    nullable: true,
+    resolve: (value) => value.user,
+    filter: (payload, variables) => {
+      console.log('payload1', variables, payload.typingUserId);
+      return variables.userId !== payload.typingUserId;
+    },
+  })
+  userStartedTyping(
+    @Args('chatroomId') chatroomId: number,
+    @Args('userId') userId: number,
+  ) {
+    return this.pubSub.asyncIterator(`userStartedTyping.${chatroomId}`);
   }
 
   @Query(() => [Chatroom])
