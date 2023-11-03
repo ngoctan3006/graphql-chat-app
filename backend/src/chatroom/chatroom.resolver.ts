@@ -1,6 +1,14 @@
 import { UseFilters, UseGuards } from '@nestjs/common';
-import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Context,
+  Mutation,
+  Query,
+  Resolver,
+  Subscription,
+} from '@nestjs/graphql';
 import { Request } from 'express';
+import { PubSub } from 'graphql-subscriptions';
 import { GraphqlAuthGuard } from 'src/auth/graphql-auth.guard';
 import { GraphQLErrorFilter } from 'src/filters/custom-exception.filter';
 import { UserService } from 'src/user/user.service';
@@ -9,10 +17,21 @@ import { Chatroom, Message } from './chatroom.types';
 
 @Resolver()
 export class ChatroomResolver {
+  public pubSub: PubSub;
   constructor(
     private readonly chatroomService: ChatroomService,
     private readonly userService: UserService,
-  ) {}
+  ) {
+    this.pubSub = new PubSub();
+  }
+
+  @Subscription((returns) => Message, {
+    nullable: true,
+    resolve: (value) => value.newMessage,
+  })
+  newMessage(@Args('chatroomId') chatroomId: number) {
+    return this.pubSub.asyncIterator(`newMessage.${chatroomId}`);
+  }
 
   @Query(() => [Chatroom])
   async getChatroomsForUser(@Args('userId') userId: number) {
