@@ -63,6 +63,21 @@ export class ChatroomResolver {
     return this.pubSub.asyncIterator(`userStoppedTyping.${chatroomId}`);
   }
 
+  @UseFilters(GraphQLErrorFilter)
+  @UseGuards(GraphqlAuthGuard)
+  @Mutation((returns) => User)
+  async userStartedTypingMutation(
+    @Args('chatroomId') chatroomId: number,
+    @Context() context: { req: Request },
+  ) {
+    const user = await this.userService.getUser(context.req.user.sub);
+    await this.pubSub.publish(`userStartedTyping.${chatroomId}`, {
+      user,
+      typingUserId: user.id,
+    });
+    return user;
+  }
+
   @Query(() => [Chatroom])
   async getChatroomsForUser(@Args('userId') userId: number) {
     return this.chatroomService.getChatroomsForUser(userId);
