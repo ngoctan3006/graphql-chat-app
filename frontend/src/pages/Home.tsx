@@ -3,6 +3,7 @@ import React from 'react';
 import {
   AddChatroom,
   AuthOverlay,
+  JoinRoomOrChatwindow,
   ProfileSetting,
   ProtectedRoutes,
   RoomList,
@@ -21,6 +22,7 @@ const Home: React.FC = () => {
           <AddChatroom />
           <Flex direction={{ base: 'column', md: 'row' }}>
             <RoomList />
+            <JoinRoomOrChatwindow />
           </Flex>
         </ProtectedRoutes>
       </>
