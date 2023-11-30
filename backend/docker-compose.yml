@@ -6,6 +6,7 @@ services:
     container_name: graphql_chat_app_db
     ports:
       - 5440:5432
+    restart: always
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
@@ -17,7 +18,8 @@ services:
     image: redis:latest
     container_name: graphql_chat_app_redis
     ports:
-      - 6479:6379
+      - 6379:6379
+    restart: always
 
 volumes:
   graphql_chat_app:
